@@ -17,6 +17,9 @@ td, th
 .clear 
     {clear: both;}
 
+.display_none
+    {display: none;}
+
 #controlpanel
     {position:absolute; top: 2em; left:0px; width:13em; bottom: 0; overflow: auto;}
 

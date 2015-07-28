@@ -253,6 +253,9 @@ sub compose : Chained('/mailbox/setup') Args(0) {
         $folders->{$sent}{selected} = 'selected' if $sent;
     }
 
+    my @recent_contacts = $c->model('DB::RecentContacts')->search({ user => $c->user->id })->all;
+    $c->stash( recent_contacts => \@recent_contacts );
+
     $c->stash({
         uri_send     => $c->stash->{uri_folder} . '/send',
         sent_folders => [ sort {($a->{name} or '') cmp ($b->{name} or '')} values %$folders ],
@@ -373,6 +376,21 @@ sub send : Chained('/mailbox/setup') Args(0) {
         },
     );
 
+    my $recent_contacts = $c->model('DB::RecentContacts');
+    my $last_used = DateTime->now();
+    foreach(split(',', $c->req->param('to')), split(',', $c->req->param('cc'))) {
+        #we only expect one address but Email::Address returns a list
+        my ($mail_address) = Email::Address->parse($_);
+
+        next unless defined $mail_address->address;
+
+        $recent_contacts->update_or_create({
+            user        => $c->user->id,
+            email       => $mail_address->address,
+            name        => $mail_address->name,
+            last_used   => $last_used,
+        });
+    }
 
     try {
         $c->forward( $c->view('RFC822') );

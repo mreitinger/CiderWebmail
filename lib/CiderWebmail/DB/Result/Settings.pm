@@ -15,6 +15,18 @@ use warnings;
 
 use base 'DBIx::Class::Core';
 
+=head1 COMPONENTS LOADED
+
+=over 4
+
+=item * L<DBIx::Class::InflateColumn::DateTime>
+
+=back
+
+=cut
+
+__PACKAGE__->load_components("InflateColumn::DateTime");
+
 =head1 TABLE: C<settings>
 
 =cut
@@ -76,8 +88,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("user");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2015-07-29 00:19:54
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:v29N/O0h54dFgubZHi2LIA
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2015-07-29 00:46:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:pBLfD0cAECv/i8lw1Zf6aA
 
 =head1 CiderWebmail::DB::Result::Settings
 

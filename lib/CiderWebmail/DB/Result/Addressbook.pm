@@ -15,6 +15,18 @@ use warnings;
 
 use base 'DBIx::Class::Core';
 
+=head1 COMPONENTS LOADED
+
+=over 4
+
+=item * L<DBIx::Class::InflateColumn::DateTime>
+
+=back
+
+=cut
+
+__PACKAGE__->load_components("InflateColumn::DateTime");
+
 =head1 TABLE: C<addressbook>
 
 =cut
@@ -77,8 +89,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07043 @ 2015-07-29 00:19:54
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JWzsZbCV866XBsWSFt3XlQ
+# Created by DBIx::Class::Schema::Loader v0.07043 @ 2015-07-29 00:46:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QGF8CFYx048rOJkaUugbDw
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;

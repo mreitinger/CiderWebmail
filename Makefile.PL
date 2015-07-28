@@ -35,6 +35,7 @@ requires 'Petal::Utils';
 
 requires 'DateTime';
 requires 'DateTime::Format::Mail';
+requires 'DateTime::Format::SQLite';
 
 requires 'DBD::SQLite';
 

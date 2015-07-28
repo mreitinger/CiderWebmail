@@ -21,6 +21,12 @@
                         <input tal:condition="true: forward" type="hidden" name="forward" tal:attributes="value string:${forward/root_message/uid}/${forward/part_id}"/>
                         <input tal:condition="true: in_reply_to" type="hidden" name="in_reply_to" tal:attributes="value string:${in_reply_to/root_message/uid}/${in_reply_to/part_id}"/>
 
+                        <div class="display_none">
+                            <datalist id="recent_contacts">
+                                <option tal:repeat="contact recent_contacts" tal:attributes="value contact/email" />
+                            </datalist>
+                        </div>
+
                         <fieldset>
                         <legend>Header</legend>
                         <label class="from">
@@ -31,13 +37,13 @@
 
                         <label class="to">
                             <span i18n:translate="">To:</span>
-                            <input name="to" id="to" tal:condition="true: message/to" tal:attributes="value message/to" type="email" multiple="multiple" required="required" />
-                            <input name="to" id="to" tal:condition="false: message/to" type="email" multiple="multiple" required="required" list="mailto" autofocus="autofocus" />
+                            <input name="to" id="to" tal:condition="true: message/to" tal:attributes="value message/to" type="email" multiple="multiple" required="required" list="recent_contacts" />
+                            <input name="to" id="to" tal:condition="false: message/to" type="email" multiple="multiple" required="required" list="mailto" autofocus="autofocus" list="recent_contacts" />
                         </label>
 
                         <label class="cc">
                             <span i18n:translate="">Cc:</span>
-                            <input name="cc" tal:attributes="value message/cc" type="email" multiple="multiple" />
+                            <input name="cc" tal:attributes="value message/cc" type="email" multiple="multiple" list="recent_contacts" />
                         </label>
 
                         <label class="subject">
